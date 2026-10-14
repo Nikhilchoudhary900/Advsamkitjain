@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Icarus Builders And Developers">
+  <rect width="120" height="120" rx="18" fill="#12263a"/>
+  <rect x="1.5" y="1.5" width="117" height="117" rx="16.5" fill="none" stroke="#c6a035" stroke-width="1.5"/>
+  <g fill="none" stroke="#c6a035" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M60 28v18"/>
+    <path d="M30 52c18-16 24-16 30-8 6-8 12-8 30 8"/>
+    <path d="M36 62c14-10 18-10 24-4 6-6 10-6 24 4"/>
+    <path d="M44 86V70h32v16"/>
+    <path d="M52 86V76h6v10"/>
+    <path d="M62 86V76h6v10"/>
+  </g>
+  <text x="60" y="108" text-anchor="middle" fill="#c6a035" font-family="Georgia, serif" font-size="10" letter-spacing="1.8">ICARUS</text>
+</svg>

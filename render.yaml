@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: crowe-chambers-site
+    runtime: node
+    plan: free
+    buildCommand: npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend
+    startCommand: node backend/server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: BLOG_PUBLISH_KEY
+        value: sj-publish-2026

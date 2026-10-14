@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Saras Builders And Developers">
+  <rect width="120" height="120" rx="18" fill="#0b1c2c"/>
+  <rect x="1.5" y="1.5" width="117" height="117" rx="16.5" fill="none" stroke="#c6a035" stroke-width="1.5"/>
+  <g fill="none" stroke="#c6a035" stroke-width="1.6" stroke-linecap="round">
+    <path d="M28 48c12-10 20-10 32 0s20 10 32 0"/>
+    <path d="M28 60c12-10 20-10 32 0s20 10 32 0"/>
+    <path d="M40 86V70h40v16"/>
+    <path d="M48 70v-8h8v8"/>
+    <path d="M64 70v-8h8v8"/>
+  </g>
+  <text x="60" y="108" text-anchor="middle" fill="#c6a035" font-family="Georgia, serif" font-size="10" letter-spacing="1.8">SARAS</text>
+</svg>

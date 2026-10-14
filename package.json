@@ -1,0 +1,12 @@
+{
+  "name": "crowe-chambers-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bash start.sh",
+    "start": "bash start.sh",
+    "build": "npm run build --prefix frontend",
+    "vercel-build": "npm run build --prefix frontend"
+  }
+}

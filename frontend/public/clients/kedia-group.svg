@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="KEDIA BUILDERS & COLONIZERS">
+  <rect width="120" height="120" rx="18" fill="#12263a"/>
+  <rect x="1.5" y="1.5" width="117" height="117" rx="16.5" fill="none" stroke="#c6a035" stroke-width="1.5"/>
+  <polygon points="60,18 98,40 98,80 60,102 22,80 22,40" fill="none" stroke="#c6a035" stroke-width="1.6"/>
+  <text x="60" y="68" text-anchor="middle" fill="#c6a035" font-family="Georgia, serif" font-size="28" font-weight="500">KG</text>
+  <text x="60" y="104" text-anchor="middle" fill="#d9c9a2" font-family="Georgia, serif" font-size="8" letter-spacing="2.2">GROUP</text>
+</svg>
