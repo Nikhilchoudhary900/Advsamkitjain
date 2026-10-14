@@ -4,9 +4,6 @@ import Layout from './components/Layout.jsx'
 import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Practice from './pages/Practice.jsx'
-import Blogs from './pages/Blogs.jsx'
-import Blog from './pages/Blog.jsx'
-import Publish from './pages/Publish.jsx'
 import Contact from './pages/Contact.jsx'
 import Faq from './pages/Faq.jsx'
 import Guide from './pages/Guide.jsx'
@@ -54,9 +51,6 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/practice" element={<Practice />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/blogs/new" element={<Publish />} />
-          <Route path="/blogs/:slug" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/guide" element={<Guide />} />

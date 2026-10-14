@@ -1,15 +1,5 @@
 import express from 'express'
 import cors from 'cors'
-import { writeFile, mkdir } from 'fs/promises'
-import { existsSync, readFileSync } from 'fs'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
-import { notes as seedNotes } from './seed-notes.js'
-
-const ROOT = dirname(fileURLToPath(import.meta.url))
-const DATA_DIR = join(ROOT, 'data')
-const BLOGS_FILE = join(DATA_DIR, 'blogs.json')
-const PUBLISH_KEY = process.env.BLOG_PUBLISH_KEY || 'sj-publish-2026'
 
 const app = express()
 app.use(cors())
@@ -27,20 +17,6 @@ app.use((req, _res, next) => {
 })
 
 const enquiries = []
-
-function loadBlogsSync() {
-  try {
-    if (existsSync(BLOGS_FILE)) {
-      const parsed = JSON.parse(readFileSync(BLOGS_FILE, 'utf8'))
-      if (Array.isArray(parsed) && parsed.length) return parsed
-    }
-  } catch {
-    /* fall through to seed data */
-  }
-  return seedNotes.map((note) => ({ ...note }))
-}
-
-let blogs = loadBlogsSync()
 
 const practiceAreas = [
   {
@@ -141,98 +117,8 @@ const practiceAreas = [
   }
 ]
 
-function slugify(value) {
-  return String(value || '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 80)
-}
-
-function estimateRead(body) {
-  const words = body.join(' ').split(/\s+/).filter(Boolean).length
-  const minutes = Math.max(3, Math.round(words / 180))
-  return `${minutes} min`
-}
-
-function formatDate(value) {
-  if (!value) {
-    return new Intl.DateTimeFormat('en-GB', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    }).format(new Date())
-  }
-  const parsed = new Date(value)
-  if (Number.isNaN(parsed.getTime())) return String(value)
-  return new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  }).format(parsed)
-}
-
-async function saveBlogs() {
-  try {
-    await mkdir(DATA_DIR, { recursive: true })
-    await writeFile(BLOGS_FILE, JSON.stringify(blogs, null, 2))
-  } catch {
-    /* read-only filesystem (e.g. Vercel) - keep the in-memory copy only */
-  }
-}
-
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', office: 'Samkit Jain, Advocate' })
-})
-
-app.get('/blogs', (_req, res) => {
-  res.json({ data: blogs })
-})
-
-app.get('/blogs/:slug', (req, res) => {
-  const note = blogs.find((item) => item.slug === req.params.slug)
-  if (!note) return res.status(404).json({ error: 'Blog not found.' })
-  res.json({ data: note })
-})
-
-app.post('/blogs', async (req, res) => {
-  const { title, category, areaId, excerpt, body, date, key } = req.body || {}
-  if (key !== PUBLISH_KEY) {
-    return res.status(401).json({ ok: false, error: 'Invalid publish key.' })
-  }
-  if (!title || !category || !excerpt || !body) {
-    return res.status(400).json({
-      ok: false,
-      error: 'Title, category, excerpt and body are required.'
-    })
-  }
-
-  const paragraphs = Array.isArray(body)
-    ? body.map((para) => String(para).trim()).filter(Boolean)
-    : String(body).split(/\n{2,}/).map((para) => para.trim()).filter(Boolean)
-
-  if (!paragraphs.length) {
-    return res.status(400).json({ ok: false, error: 'Please add the body of the note.' })
-  }
-
-  let slug = slugify(title)
-  if (!slug) slug = `note-${Date.now()}`
-  if (blogs.some((item) => item.slug === slug)) slug = `${slug}-${Date.now()}`
-
-  const note = {
-    slug,
-    category: String(category).trim(),
-    areaId: areaId ? String(areaId).trim() : '',
-    read: estimateRead(paragraphs),
-    date: formatDate(date),
-    title: String(title).trim(),
-    excerpt: String(excerpt).trim(),
-    body: paragraphs
-  }
-
-  blogs.unshift(note)
-  await saveBlogs()
-  res.status(201).json({ ok: true, data: note })
 })
 
 app.get('/practice-areas', (_req, res) => {

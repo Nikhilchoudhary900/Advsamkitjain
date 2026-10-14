@@ -9,5 +9,3 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "22"
-      - key: BLOG_PUBLISH_KEY
-        value: sj-publish-2026
