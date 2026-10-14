@@ -8,6 +8,7 @@ const linkKeys = [
   { to: '/', key: 'home' },
   { to: '/about', key: 'about' },
   { to: '/practice', key: 'practice' },
+  { to: '/blogs', key: 'blogs' },
   { to: '/guide', key: 'guide' },
   { to: '/faq', key: 'faq' },
   { to: '/contact', key: 'contact' }
